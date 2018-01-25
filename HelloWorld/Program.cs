@@ -14,47 +14,96 @@ namespace HelloWorld
 
             int count = 0;
 
+            int x = 0;
+
+            int y = 0;
+
             Random num = new Random();
 
-            int randomNum = num.Next(0, 101);
+            Console.WriteLine("Please enter your first bound");
 
-            Console.WriteLine("I am thinking of a random number between 0 and 100 (100 included");
+            x = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Please enter your second bound");
+
+            y = Convert.ToInt32(Console.ReadLine());
+
+            int randomNum = num.Next(x, y + 1);
+
+            Console.WriteLine("I am thinking of a random number between" + x + " and " + y);
 
             Console.WriteLine("Type your guess");
 
             userNum = Convert.ToInt32(Console.ReadLine());
 
-            numberGame(randomNum, userNum, count);
+            if(userNum < y && userNum >= x)
+            {
+
+                numberGame(randomNum, userNum, count, x, y);
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid Number");
+            }
+
+            
 
             
 
         }
 
-        static void numberGame(int randomNum, int userNum, int count)
+        static void numberGame(int randomNum, int userNum, int count, int x, int y)
         {
             
             if(userNum < randomNum)
             {
                 Console.WriteLine("Too low");
                 Console.WriteLine("Try again, enter another Number");
-
+                count = count + 1;
                 userNum = Convert.ToInt32(Console.ReadLine());
 
-                count = count + 1;
+                if (userNum < y && userNum >= x)
+                {
 
-                numberGame(randomNum, userNum, count);
+                    numberGame(randomNum, userNum, count, x, y);
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Number");
+                    count = count - 1;
+                }
+
+
+
+                numberGame(randomNum, userNum, count, x ,y);
             }
 
             else if(userNum > randomNum)
             {
                 Console.WriteLine("Too High");
                 Console.WriteLine("Try again, enter another Number");
-
+                count = count + 1;
                 userNum = Convert.ToInt32(Console.ReadLine());
 
-                count = count + 1;
+                if (userNum < y && userNum >= x)
+                {
 
-                numberGame(randomNum, userNum, count);
+                    numberGame(randomNum, userNum, count, x ,y);
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Number");
+                    count = count - 1;
+                }
+
+
+
+
+
+                numberGame(randomNum, userNum, count, x, y);
 
             }
 
